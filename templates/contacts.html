@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Школа программирования</title>
+    <title>Школа программирования | контакты</title>
 
     <style>
         body {
@@ -128,43 +128,13 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<h1>Наши курсы</h1>
-<p>Все программы действуют в течение года.</p>
-<table>
-    <tr class="head">
-        <th></th>
-        <th>Москва</th>
-        <th>Санкт-Петербург</th>
-        <th>Екатеринбург</th>
-    </tr>
-    <tr>
-        <th>Основы Python</th>
-        <td>Сб, 20 февраля 2021<br>11:00 - 14:00</td>
-        <td>Сб, 6 марта 2021<br>11:00 - 14:00</td>
-        <td>Сб, 20 марта 2021<br>11:00 - 14:00</td>
-    </tr>
-    <tr class="even">
-        <th>Алгоритмы и структуры данных на Python</th>
-        <td>Сб, 10 апреля 2021<br>11:00 - 13:00</td>
-        <td>Сб, 1 мая 2021<br>11:00 - 13:00</td>
-        <td>Сб, 8 мая 2021<br>11:00 - 13:00</td>
-    </tr>
-    <tr>
-        <th>Основы Django</th>
-        <td>Сб, 26 июня 2021<br>11:00 - 14:00</td>
-        <td>Сб, 3 июля 2021<br>11:00 - 14:00</td>
-        <td>Сб, 10 июля 2021<br>11:00 - 14:00</td>
-    </tr>
-    <tr class="even">
-        <th>Основы Flask</th>
-        <td>Сб, 28 августа 2021<br>11:00 - 16:00</td>
-        <td>Сб, 4 сентября 2021<br>11:00 - 16:00</td>
-        <td>Сб, 11 сентября 2021<br>11:00 - 16:00</td>
-    </tr>
-</table>
+<h1>Наши контакты</h1>
+<p>Мы где-то находимся, вам будет несложно нас там найти, если поедете туда,
+    где мы находимся.</p>
+
 <form action="" method="post">
     <fieldset>
-        <legend>Зарегистрируйтесь</legend>
+        <legend>Оставьте отзыв о нашей работе</legend>
         <p>
             <label class="title" for="name">Ваше имя:</label>
             <input type="text" name="name" id="name"><br>
@@ -172,20 +142,16 @@
             <input type="text" name="email" id="email">
         </p>
         <p>
-            <label for="location" class="title">Ближайший центр:</label>
-            <select name="location" id="location">
-                <option value="moskow">Москва</option>
-                <option value="peter">Санкт-Петербург</option>
-                <option value="ekater">Екатеринбург</option>
-            </select>
+            <label class="title" for="feedback">Ваш отзыв:</label>
+            <textarea name="feedback" id="feedback" rows="3" cols="35"></textarea>
         </p>
-        <span class="title">Являетесь участником?</span>
+        <span class="title">Чё, нравится?</span>
         <p>
-            <label><input type="radio" name="member" value="yes"> Да</label>
-            <label><input type="radio" name="member" value="no"> Нет</label>
+            <label><input type="radio" name="member" value="yes"> Ага</label>
+            <label><input type="radio" name="member" value="no"> Неа</label>
         </p>
     </fieldset>
-    <div class="submit"><input type="submit" value="Регистрация"></div>
+    <div class="submit"><input type="submit" value="Отправить"></div>
 </form>
 </body>
 </html>

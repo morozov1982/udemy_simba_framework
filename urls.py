@@ -1,9 +1,9 @@
-from views import Index, About, Blog, Shop
+from views import Index, About, Blog, Contacts
 
 # Путь: Контроллер()
 routes = {
     '/': Index(),
     '/about/': About(),
     '/blog/': Blog(),
-    '/shop/': Shop(),
+    '/contacts/': Contacts(),
 }

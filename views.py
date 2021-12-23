@@ -17,6 +17,6 @@ class Blog:
         return '200 OK', 'Blog without html ;-)'
 
 
-class Shop:
+class Contacts:
     def __call__(self):
-        return '200 OK', 'Shop without html ;-)'
+        return '200 OK', render('contacts.html')
