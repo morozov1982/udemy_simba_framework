@@ -1,15 +1,15 @@
 """Модуль с контроллерами вэб-приложения"""
 from datetime import date
 
-from components.models import Engine
 from simba_framework.templator import render
+from components.models import Engine
 
 site = Engine()
 
 
 class Index:
     def __call__(self, request):
-        return '200 OK', render('index.html')
+        return '200 OK', render('index.html', objects_list=site.categories)
 
 
 class About:
@@ -94,7 +94,7 @@ class CreateCategory:
 
             category = None
             if category_id:
-                category = site.find_category_by_id(category_id)
+                category = site.find_category_by_id(int(category_id))
 
             new_category = site.create_category(name, category)
 

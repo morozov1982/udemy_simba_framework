@@ -28,20 +28,21 @@ class Course:
     def __init__(self, name, category):
         self.name = name
         self.category = category
+        self.category.courses.append(self)
 
 
 class InteractiveCourse(Course):
     pass
 
 
-class RecordedCourse(Course):
+class RecordCourse(Course):
     pass
 
 
 class CourseFactory:
     types = {
         'interactive': InteractiveCourse,
-        'recorded': RecordedCourse,
+        'record': RecordCourse,
     }
 
     @classmethod
@@ -86,7 +87,7 @@ class Engine:
             print('item', item.id)
             if item.id == id:
                 return item
-        raise Exception(f'Нет категориии с id = {id}')
+        raise Exception(f'Нет категории с id = {id}')
 
     @staticmethod
     def create_course(type_, name, category):
