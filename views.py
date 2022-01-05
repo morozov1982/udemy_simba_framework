@@ -3,30 +3,37 @@ from datetime import date
 
 from simba_framework.templator import render
 from components.models import Engine
+from components.decorators import AppRoute
 
 site = Engine()
+routes = {}
 
 
+@AppRoute(routes=routes, url='/')
 class Index:
     def __call__(self, request):
         return '200 OK', render('index.html', objects_list=site.categories)
 
 
+@AppRoute(routes=routes, url='/about/')
 class About:
     def __call__(self, request):
         return '200 OK', render('about.html')
 
 
+@AppRoute(routes=routes, url='/blog/')
 class Blog:
     def __call__(self, request):
         return '200 OK', 'Blog without html ;-)'
 
 
+@AppRoute(routes=routes, url='/contacts/')
 class Contacts:
     def __call__(self, request):
         return '200 OK', render('contacts.html')
 
 
+@AppRoute(routes=routes, url='/study-programs/')
 class StudyPrograms:
     def __call__(self, request):
         return '200 OK', render('study-programs.html', data=date.today())
@@ -37,6 +44,7 @@ class NotFound404:
         return '404 WHAT', '404 Page not Found'
 
 
+@AppRoute(routes=routes, url='/courses-list/')
 class CoursesList:
     def __call__(self, request):
         try:
@@ -50,6 +58,7 @@ class CoursesList:
             return '200 OK', 'No courses have been added yet'
 
 
+@AppRoute(routes=routes, url='/create-course/')
 class CreateCourse:
     category_id = -1
 
@@ -81,6 +90,7 @@ class CreateCourse:
                 return '200 OK', 'No courses have been added yet'
 
 
+@AppRoute(routes=routes, url='/create-category/')
 class CreateCategory:
     def __call__(self, request):
         if request['method'] == 'POST':
@@ -108,6 +118,7 @@ class CreateCategory:
                                     categories=categories)
 
 
+@AppRoute(routes=routes, url='/category-list/')
 class CategoryList:
     def __call__(self, request):
         return '200 OK', render('category-list.html',
