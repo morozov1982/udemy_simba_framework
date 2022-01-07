@@ -3,12 +3,12 @@ from framework_requests import GetRequests, PostRequests
 
 
 class PageNotFound404:
-    def __call__(self):
+    def __call__(self, request):
         return '404 WHAT', '404 PAGE Not Found'
 
 
 class Framework:
-    """Класс Framework -  основа WSGI-фреймворка"""
+    """Класс Framework - основа WSGI-фреймворка"""
 
     def __init__(self, routes_obj):
         self.routes_lst = routes_obj
@@ -17,7 +17,7 @@ class Framework:
         # Адрес, по которому пользователь выполнил переход
         path = environ['PATH_INFO'].lower()  # не уверен, что это хорошо ;-)
 
-        # Добавляем закрывающий /
+        # Добавляем закрывающий слеш
         if not path.endswith('/'):
             path = f'{path}/'
 

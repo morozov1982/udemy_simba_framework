@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    Школа программирования | Список студентов
+{% endblock %}
+{% block style %}
+    {% include 'inc/inc-style.html' %}
+{% endblock %}
+{% block menu %}
+    {% include 'inc/inc-menu.html' %}
+{% endblock %}
+{% block body %}
+    <div>
+        <ul>
+            <li>
+                <a href="/create-student/">Создание студента</a>
+            </li>
+            <li>
+                <a href="/add-student/">Добавить студента на курс</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h1>Сисок студентов</h1>
+        <ul>
+            {% for item in objects_list %}
+            <li>
+                {{item.name}}
+                {% for course in item.courses %}
+                    {{course.name}}
+                {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
