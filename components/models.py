@@ -177,7 +177,7 @@ class StudentMapper:
             raise DbDeleteException(e.args)
 
 
-connection = sqlite3.connect('patterns.sqlite')
+connection = sqlite3.connect('project.sqlite')
 
 
 class MapperRegistry:
