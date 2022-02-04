@@ -15,9 +15,14 @@ UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 
 @AppRoute(routes=routes, url='/')
-class Index:
-    def __call__(self, request):
-        return '200 OK', render('index.html', objects_list=site.categories)
+class Index(ListView):
+    template_name = 'index.html'
+
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('category')
+        return mapper.all()
+    # def __call__(self, request):
+    #     return '200 OK', render('index.html', objects_list=site.categories)
 
 
 @AppRoute(routes=routes, url='/about/')
@@ -97,39 +102,28 @@ class CreateCourse:
 
 
 @AppRoute(routes=routes, url='/create-category/')
-class CreateCategory:
-    def __call__(self, request):
-        if request['method'] == 'POST':
-            print(request)
-            data = request['data']
+class CategoriesCreateView(CreateView):
+    template_name = 'create-category.html'
 
-            name = data['name']
-            name = site.decode_value(name)
+    def create_obj(self, data: dict):
+        name = data.get('name')
+        name = site.decode_value(name)
 
-            category_id = data.get('category_id')
+        new_category = site.create_category()
+        site.categories.append(new_category)
 
-            category = None
-            if category_id:
-                category = site.find_category_by_id(int(category_id))
-
-            new_category = site.create_category(name, category)
-
-            site.categories.append(new_category)
-
-            return '200 OK', render('index.html',
-                                    objects_list=site.categories)
-        else:
-            categories = site.categories
-            return '200 OK', render('create-category.html',
-                                    categories=categories)
+        schema = {'name': name}
+        new_category.mark_new(schema)
+        UnitOfWork.get_current().commit()
 
 
-# TODO: Переписать с использованием ListView
 @AppRoute(routes=routes, url='/category-list/')
-class CategoryList:
-    def __call__(self, request):
-        return '200 OK', render('category-list.html',
-                                objects_list=site.categories)
+class CategoryListView(ListView):
+    template_name = 'category-list.html'
+
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('category')
+        return mapper.all()
 
 
 @AppRoute(routes=routes, url='/student-list/')
@@ -146,11 +140,14 @@ class StudentCreateView(CreateView):
     template_name = 'create-student.html'
 
     def create_obj(self, data: dict):
-        name = data['name']
+        name = data.get('name')
         name = site.decode_value(name)
-        new_obj = site.create_user('student', name)
+
+        new_obj = site.create_user('student')
         site.students.append(new_obj)
-        new_obj.mark_new()
+
+        schema = {'name': name}
+        new_obj.mark_new(schema)
         UnitOfWork.get_current().commit()
 
 
